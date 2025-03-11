@@ -1,0 +1,41 @@
+When setting up express with typescript things to remembers
+
+makes sure types@express and express versions match
+ when setting up auto transcribing commans make sure you have this format in the package.json
+
+    "transcribe": "tsc", - transcribe all files, not just the app.ts - this will cause errors
+    "runapp": "node app.js",
+    "dev": "npm run transcribe && npm run runapp" - this will transcribe and then run the app.js
+
+makes sure tsconfig.json complier settings are as such
+"compilerOptions": {
+    "target": "ES2016",  - what ever version used
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+}
+
+Doing this will allow use to usn the import method for express
+
+
+When you run npm test, by default, it will execute all test files that match the pattern specified in your Jest configuration. This includes all files in the __tests__ folder or any files that match the naming convention (e.g., *.test.ts or *.spec.ts).
+
+To Test All Files:
+
+	•	Simply running npm test will execute all the tests, based on the patterns defined in your Jest config.
+
+To Test Individual Files:
+
+	•	You can run specific test files by using Jest’s --testPathPattern flag. This allows you to run tests for a particular file or folder.
+
+For example, to run just the tests in auth.test.ts:
+
+npx jest --testPathPattern=auth.test.ts
+
+Or to run a specific folder of tests:
+
+npx jest --testPathPattern=tests/auth
