@@ -11,6 +11,7 @@ const express_1 = __importDefault(require("express"));
 exports.app = (0, express_1.default)();
 const mongoose_1 = __importDefault(require("mongoose"));
 const cors_1 = __importDefault(require("cors"));
+const routes_1 = __importDefault(require("./routes"));
 // Models
 // imports controllers
 mongoose_1.default.connect(process.env.MONGODB_URI);
@@ -25,6 +26,7 @@ exports.app.use(express_1.default.json());
 exports.app.get('/', (req, res) => {
     res.json({ Message: 'Hello GamerCred' });
 });
+exports.app.use('/api', routes_1.default);
 exports.server = exports.app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`);
 });
