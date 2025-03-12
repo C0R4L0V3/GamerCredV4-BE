@@ -6,6 +6,8 @@ export const app = express();
 import mongoose from "mongoose";
 import cors from "cors";
 
+import routes from './routes'
+
 // Models
 
 // imports controllers
@@ -27,14 +29,13 @@ app.get('/', (req, res) => {
     res.json({Message: 'Hello GamerCred'})
 })
 
+app.use('/api', routes)
+
 export const server = app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`);
-    
+
 })
 
 
 
 module.exports = {app, server}
-
-
-
