@@ -14,10 +14,12 @@ const cors_1 = __importDefault(require("cors"));
 const routes_1 = __importDefault(require("./routes"));
 // Models
 // imports controllers
-mongoose_1.default.connect(process.env.MONGODB_URI);
-mongoose_1.default.connection.on('connected', () => {
-    console.log(`Connected to MongoDB ${mongoose_1.default.connection.name}.`);
-});
+if (process.env.NODE_ENV !== 'test') {
+    mongoose_1.default.connect(process.env.MONGODB_URI);
+    mongoose_1.default.connection.on('connected', () => {
+        console.log(`Connected to MongoDB ${mongoose_1.default.connection.name}.`);
+    });
+}
 const PORT = process.env.PORT || 3000;
 // middleware
 exports.app.use((0, cors_1.default)({ origin: 'http://localhost:5173' }));

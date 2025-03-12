@@ -12,10 +12,17 @@ import routes from './routes'
 
 // imports controllers
 
-mongoose.connect(process.env.MONGODB_URI as string);
-mongoose.connection.on('connected', () => {
-    console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
-})
+if(process.env.NODE_ENV !== 'test') {
+
+  mongoose.connect(process.env.MONGODB_URI as string);
+  mongoose.connection.on('connected', () => {
+      console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
+  })
+  
+}
+
+
+
 const PORT: string|number = process.env.PORT || 3000
 
 // middleware
