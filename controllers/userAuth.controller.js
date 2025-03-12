@@ -35,9 +35,9 @@ const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             hashedPassword: bcrypt_1.default.hashSync(password, 12),
             role
         });
-        console.log(user);
+        //TODO TOKEN PASSING
         //send something
-        res.status(201).json({ success: true });
+        res.status(201).json(user);
     }
     catch (error) {
         console.log(error);

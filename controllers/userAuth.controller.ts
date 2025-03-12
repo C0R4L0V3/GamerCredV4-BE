@@ -29,10 +29,10 @@ const signUp = async (req: Request, res: Response) => {
       role
     })
 
-    console.log(user)
+    //TODO TOKEN PASSING
 
     //send something
-    res.status(201).json({ success: true })
+    res.status(201).json(user)
 
   } catch (error :any) {
     console.log(error)
