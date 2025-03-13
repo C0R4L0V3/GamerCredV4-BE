@@ -24,25 +24,24 @@ afterAll(async () => {
 
 
 describe('Test the signup route', () => {
-  it('should return an id', async () => {
+  const newUser = {
+     username: 'Jane Doe',
+     password: 'test123!',
+     role: 'Guest',
+   };
 
-     const newUser = {
-        username: 'Jane Doe',
-        password: 'test123!',
-        role: 'Guest',
-      };
-
+  it('it should return 201, username, role', async () => {
 
       const response = await request(app)
       .post('/auth/signup')
       .send(newUser)
       expect(201)
       expect(response.body).toHaveProperty('_id')
-      //expect(response.body).toEqual({ password: 'test123!', role: 'Guest',username: 'Jane Doe' })
-      //expect(response.body.username).toBe(newUser.username);
-      //expect(response.body.role).toBe(newUser.role);
-
+      expect(response.body.username).toBe(newUser.username);
+      expect(response.body.role).toBe(newUser.role);
   })
+
+
 })
 
 afterAll(done => {

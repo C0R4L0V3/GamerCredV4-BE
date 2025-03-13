@@ -25,10 +25,10 @@ const PORT = process.env.PORT || 3000;
 exports.app.use((0, cors_1.default)({ origin: 'http://localhost:5173' }));
 exports.app.use(express_1.default.json());
 // approutes
-exports.app.get('/', (req, res) => {
-    res.json({ Message: 'Hello GamerCred' });
-});
-exports.app.use('/api', routes_1.default);
+// app.get('/', (req, res) => {
+//     res.json({Message: 'Hello GamerCred'})
+// })
+exports.app.use('/', routes_1.default);
 exports.server = exports.app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`);
 });
