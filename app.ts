@@ -18,7 +18,7 @@ if(process.env.NODE_ENV !== 'test') {
   mongoose.connection.on('connected', () => {
       console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
   })
-  
+
 }
 
 
@@ -32,11 +32,11 @@ app.use(express.json())
 
 // approutes
 
-app.get('/', (req, res) => {
-    res.json({Message: 'Hello GamerCred'})
-})
+// app.get('/', (req, res) => {
+//     res.json({Message: 'Hello GamerCred'})
+// })
 
-app.use('/api', routes)
+app.use('/', routes)
 
 export const server = app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`);
