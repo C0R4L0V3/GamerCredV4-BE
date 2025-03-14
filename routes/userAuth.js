@@ -8,4 +8,5 @@ const index_js_1 = __importDefault(require("../controllers/index.js")); // Ensur
 const router = express_1.default.Router();
 router.get('/', index_js_1.default.userAuth.index);
 router.post('/signup', index_js_1.default.userAuth.signUp);
+router.post('/login', index_js_1.default.userAuth.userLogin);
 exports.default = router;

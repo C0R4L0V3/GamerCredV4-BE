@@ -32,4 +32,7 @@ exports.app.use('/', routes_1.default);
 exports.server = exports.app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`);
 });
-module.exports = { app: exports.app, server: exports.server };
+exports.default = {
+    app: exports.app,
+    server: exports.server
+};
