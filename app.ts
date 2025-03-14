@@ -45,4 +45,7 @@ export const server = app.listen(PORT, () => {
 
 
 
-module.exports = {app, server}
+export default {
+    app,
+    server
+}
