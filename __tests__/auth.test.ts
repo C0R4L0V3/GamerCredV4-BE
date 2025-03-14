@@ -7,9 +7,9 @@ import models from '../models';
 
 let mongoServer: MongoMemoryServer;
 
-// Tests Users
 const hashedPassword = bcrypt.hashSync('test123!', 12);
 
+// Tests Users
 const exsistingUser = {
   username: `Jane Doe`, 
   password: 'test123!', //stores plain text, hases before inserting
@@ -22,7 +22,6 @@ const newUser = {
   role: 'Guest',
 };
 
-
 // === BEFORE AllS ===
 
 beforeAll(async () => {
@@ -32,7 +31,7 @@ beforeAll(async () => {
   // Connect Mongoose to this test database
   await mongoose.connect(mongoUri, { dbName: 'testdb' });
 
-  //clears database is clean before inserting test users
+  //Ensures database is clear before inserting test users
   await models.User.deleteMany({})
 
   //hashes password and creates test user
@@ -45,8 +44,6 @@ beforeAll(async () => {
   console.log("Test User Create:", createdUser);
   
 });
-
-
 
 // === TESTS ===
 
@@ -63,7 +60,7 @@ describe('Test the signup route', () => {
   }, 10000)
 })
 
-//login test
+//login Test
 describe('Test the login route', () => {
   it('if should return a 201, validate password and return username, role' , async () => {
     const response = await request(app)
@@ -78,7 +75,6 @@ describe('Test the login route', () => {
     expect(response.body.role).toBe(exsistingUser.role)
   }, 10000)
 })
-
 
 //==== After alls =====
 
