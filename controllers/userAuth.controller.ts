@@ -16,8 +16,16 @@ const index = async(req: Request, res: Response) => {
 const signUp = async (req: Request, res: Response) => {
   try {
     const { username, password, role } = req.body
-    const existingUser = await models.User.findOne({ username })
-    if(existingUser) return res.status(409).json({ error: 'Username already taken.' })
+
+    // Validate input
+    // if(!username || !password ) {
+    //   return res.status(400).json({ error: 'All fields are required'});
+    // }
+
+    //check is user exsists
+    const existingUser = await models.User.findOne({ username });
+    if(existingUser) return res.status(409).json({ error: 'Username already taken.' });
+    
     //create the user
     const user = await models.User.create({
       username,
@@ -26,10 +34,11 @@ const signUp = async (req: Request, res: Response) => {
     })
     //TODO TOKEN PASSING
 
-    //send something
+    // send something
     res.status(201).json(user)
+
   } catch (error :any) {
-    console.log(error)
+    console.log('signup error:', error)
     res.status(500).json({ error: error.message })
   }
 
@@ -49,7 +58,7 @@ const userLogin = async ( req: Request, res: Response) => {
     //validates password
     const validatePW = bcrypt.compareSync( password, existingUser.hashedPassword)
     console.log(`password Validationg (${password} vs ${existingUser.hashedPassword}):`, validatePW);
-    if (!validatePW) return res.status(409).json({ error: "Incorrect password"})
+    if (!validatePW) return res.status(409).json({ error: 'Incorrect password'})
       res.status(201).json({
         _id: existingUser._id,
         username:existingUser.username,
