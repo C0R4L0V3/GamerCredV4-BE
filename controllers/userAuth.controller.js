@@ -26,9 +26,16 @@ const index = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { username, password, role } = req.body;
+        // Validate input
+        // if(!username || !password ) {
+        //   return res.status(400).json({ error: 'All fields are required'});
+        // }
+        //check is user exsists
         const existingUser = yield models_1.default.User.findOne({ username });
         if (existingUser)
             return res.status(409).json({ error: 'Username already taken.' });
+        //heash password
+        // const hashedPassword = bcrypt.hashSync(password, 12);
         //create the user
         const user = yield models_1.default.User.create({
             username,
@@ -36,27 +43,30 @@ const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             role
         });
         //TODO TOKEN PASSING
-        //send something
+        // send something
         res.status(201).json(user);
     }
     catch (error) {
-        console.log(error);
+        console.log('signup error:', error);
         res.status(500).json({ error: error.message });
     }
 });
+//user Login controller
 const userLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
     try {
+        //checks for exsisting user
         const existingUser = yield models_1.default.User.findOne({ username });
         if (!existingUser) {
             console.log("no User Found for:", username);
             return res.status(409).json({ error: 'No User Found' });
         }
         console.log("user found:", existingUser);
+        //validates password
         const validatePW = bcrypt_1.default.compareSync(password, existingUser.hashedPassword);
         console.log(`password Validationg (${password} vs ${existingUser.hashedPassword}):`, validatePW);
         if (!validatePW)
-            return res.status(409).json({ error: "Incorrect password" });
+            return res.status(409).json({ error: 'Incorrect password' });
         res.status(201).json({
             _id: existingUser._id,
             username: existingUser.username,
