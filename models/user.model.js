@@ -1,7 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = require("mongoose");
-const userSchema = new mongoose_1.Schema({
+const mongoose_1 = __importDefault(require("mongoose"));
+const { Schema, model } = mongoose_1.default;
+const userSchema = new Schema({
     username: { type: String, required: true },
     hashedPassword: { type: String, required: true },
     displayName: { type: String },
@@ -10,5 +14,5 @@ const userSchema = new mongoose_1.Schema({
     //additional platform apis to link to user account e.g microsoft, xbox live, sony
     steamId: { type: String },
 });
-const User = (0, mongoose_1.model)('User', userSchema);
+const User = model('User', userSchema);
 exports.default = User;

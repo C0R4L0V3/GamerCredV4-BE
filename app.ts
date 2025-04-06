@@ -6,17 +6,26 @@ export const app = express();
 import mongoose from "mongoose";
 import cors from "cors";
 
-const logger = require('./logger')
 import routes from './routes'
 
 // Models
 
 // imports controllers
 
-mongoose.connect(process.env.MONGODB_URI as string);
-mongoose.connection.on('connected', () => {
-    console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
-})
+import { logger } from './logger'
+
+
+if(process.env.NODE_ENV !== 'test') {
+
+  mongoose.connect(process.env.MONGODB_URI as string);
+  mongoose.connection.on('connected', () => {
+      console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
+  })
+
+}
+
+
+
 const PORT: string|number = process.env.PORT || 3000
 
 // middleware
@@ -34,10 +43,11 @@ app.use((err:any, req:any, res:any, next:any) => {
 
 // approutes
 
-//test routes
-app.get('/', (req, res) => {
-    res.json({Message: 'Hello GamerCred'})
-})
+// app.get('/', (req, res) => {
+//     res.json({Message: 'Hello GamerCred'})
+// })
+
+app.use('/', routes)
 
 
 
@@ -50,4 +60,7 @@ export const server = app.listen(PORT, () => {
 
 
 
-module.exports = {app, server}
+export default {
+    app,
+    server
+}

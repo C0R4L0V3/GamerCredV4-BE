@@ -1,8 +1,8 @@
 import express from 'express'
-const router = express.Router()
-const userAuthRoutes = require('./userAuth')
+import userAuthRoutes from './userAuth.js' // Ensure you include `.js` for ESM compatibility
 
-//user
+const router = express.Router()
+
 router.use('/auth', userAuthRoutes)
 
 export default router

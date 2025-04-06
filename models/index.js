@@ -3,6 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// const User = require('./user.model');
 const user_model_1 = __importDefault(require("./user.model"));
-const models = { User: user_model_1.default };
-exports.default = models;
+// module.exports = {
+//   User
+// }
+exports.default = { User: user_model_1.default };

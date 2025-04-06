@@ -6,7 +6,7 @@
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "transcribe": "tsc",
-    "runapp": "node app.js",
+    "runapp": "nodemon app.js",
     "dev": "npm run transcribe && npm run runapp"
   },
   "keywords": [],
@@ -29,8 +29,10 @@
     "ts-jest": "^29.2.6"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "mongodb-memory-server": "^10.1.4",
     "typescript": "^5.8.2"
   }
 }

@@ -1,9 +1,12 @@
 import express from 'express'
-import { signUp } from '../controllers'
+import controllers from '../controllers/index.js'; // Ensure `.js` for ESM compatibility
+
 
 const router = express.Router()
 
+router.get('/', controllers.userAuth.index)
+router.post('/signup', controllers.userAuth.signUp);
+router.post('/login', controllers.userAuth.userLogin);
 
-router.post('/signup', signUp)
 
 export default router

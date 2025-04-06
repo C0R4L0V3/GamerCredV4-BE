@@ -4,8 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const userAuth_js_1 = __importDefault(require("./userAuth.js")); // Ensure you include `.js` for ESM compatibility
 const router = express_1.default.Router();
-const userAuthRoutes = require('./userAuth');
-//user
-router.use('/auth', userAuthRoutes);
+router.use('/auth', userAuth_js_1.default);
 exports.default = router;

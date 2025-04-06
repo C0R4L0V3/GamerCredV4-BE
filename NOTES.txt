@@ -39,3 +39,6 @@ npx jest --testPathPattern=auth.test.ts
 Or to run a specific folder of tests:
 
 npx jest --testPathPattern=tests/auth
+
+
+ to run the node environment in test use this command - NODE_ENV=test npx jest --testPathPattern=auth.test.ts
